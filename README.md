@@ -5,12 +5,12 @@ NodeJS Buffer interface provides a way to manipulate bytes, but what if we neede
 
 This library was created to address the gap of a built-in bit interface.
 
-[![NPM][NPM img]][NPM Status]
-[![Node][Node img]][NPM Status]
-[![Travis][Travis img]][Travis Status]
-[![AppVeyor][AppVeyor img]][AppVeyor Status]
-[![bitHound][bitHound img]][bitHound Status]
-[![License][License img]][License Link]
+[![Build Status](https://travis-ci.org/jodevsa/node-bitview.svg?branch=master)](https://travis-ci.org/jodevsa/node-bitview)
+[![bitHound Dependencies](https://www.bithound.io/github/jodevsa/node-bitview/badges/dependencies.svg)](https://www.bithound.io/github/jodevsa/node-bitview/master/dependencies/npm)
+![bitHound Overall Score](https://www.bithound.io/github/jodevsa/node-bitview/badges/score.svg)
+![issues](https://img.shields.io/github/issues/jodevsa/node-bitview.svg)
+![stars](https://img.shields.io/github/stars/jodevsa/node-bitview.svg)
+![license](https://img.shields.io/github/license/jodevsa/node-bitview.svg)
 
 Installation
 -----
