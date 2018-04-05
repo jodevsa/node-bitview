@@ -1,7 +1,7 @@
 Node BitView
 ===============================
 
-NodeJS Buffer interface provides ways to manipulate bytes, but what if we needed to manipulate bits?
+NodeJS Buffer interface provides a way to manipulate bytes, but what if we needed to manipulate bits?
 
 This library was created to address the gap of a built-in bit interface.
 
@@ -31,16 +31,14 @@ Methods
     Returns the value of the bit at location pos  (0 or 1)
 ### .set(pos,v)
     Sets the value of a bit at location pos to v
+### .toString()
+      Returns a string representation of the BitView.
 ### .toBuffer()
     Returns the buffer used by the view.
 Properties
 -----
 ### .length
     Returns length in bits.
-
-### .from(arg)
-    Another interface to create a new BitView instance
-    arg could be an array of bits [1,0,1] or a string '1010' or a buffer.
 
 Usage:
 
