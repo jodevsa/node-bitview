@@ -5,6 +5,12 @@ NodeJS Buffer interface provides a way to manipulate bytes, but what if we neede
 
 This library was created to address the gap of a built-in bit interface.
 
+[![NPM][NPM img]][NPM Status]
+[![Node][Node img]][NPM Status]
+[![Travis][Travis img]][Travis Status]
+[![AppVeyor][AppVeyor img]][AppVeyor Status]
+[![bitHound][bitHound img]][bitHound Status]
+[![License][License img]][License Link]
 
 Installation
 -----
