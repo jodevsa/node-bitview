@@ -33,18 +33,19 @@ class BitView {
     if (n > (this.size * BYTE_SIZE - 1)) {
       throw new Error("Index out of range.")
     }
-    return (this.array[n >> 3] >>> (BYTE_SIZE - 1 - (n % BYTE_SIZE))) % 2
+    return (this.array[n >>> 3] >>> (BYTE_SIZE - 1 - (n % BYTE_SIZE))) % 2
   }
   flip(n) {
     if (n > (this.size * BYTE_SIZE - 1)) {
       throw new Error("Index out of range.")
     }
-    const original = this.array[n >> 3];
-    const oldValue = (original >>> (BYTE_SIZE - 1 - (n % BYTE_SIZE))) % 2;
+    const position = n >>> 3;
+    const original = this.array[position];
+    const oldValue = (original >> (BYTE_SIZE - 1 - (n % BYTE_SIZE))) % 2;
     if (oldValue) {
-      this.array[n >> 3] = (original ^ 1 << (BYTE_SIZE - 1 - (n % BYTE_SIZE)));
+      this.array[position] = (original ^ 1 << (BYTE_SIZE - 1 - (n % BYTE_SIZE)));
     } else {
-      this.array[n >> 3] = (original | 1 << (BYTE_SIZE - 1 - (n % BYTE_SIZE)));
+      this.array[position] = (original | 1 << (BYTE_SIZE - 1 - (n % BYTE_SIZE)));
 
     }
   }
@@ -55,16 +56,16 @@ class BitView {
     if (n > (this.size * BYTE_SIZE - 1)) {
       throw new Error("Index out of range.")
     }
-    const original = this.array[n >> 3];
+    const position = n >>> 3;
+    const original = this.array[position];
     if (original) {
-      this.array[n >> 3] = (original ^ 1 << (BYTE_SIZE - 1 - (n % BYTE_SIZE)));
+      this.array[position] = (original ^ 1 << (BYTE_SIZE - 1 - (n % BYTE_SIZE)));
     } else {
-      this.array[n >> 3] = (original | 1 << (BYTE_SIZE - 1 - (n % BYTE_SIZE)));
+      this.array[position] = (original | 1 << (BYTE_SIZE - 1 - (n % BYTE_SIZE)));
 
     }
   }
 
 }
-
 
 module.exports = BitView;
