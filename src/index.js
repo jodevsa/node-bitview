@@ -6,16 +6,14 @@ class BitView {
       const size = arg;
       this.size = Math.ceil(size / BYTE_SIZE);
       this.array = new Buffer(this.size);
-      this.length = this.size * 8;
     } else if (Buffer.isBuffer(arg)) {
       const buffer = arg;
       this.array = buffer;
       this.size = buffer.length;
-      this.length = this.size * 8;
     } else {
       throw new Error("BitView only accepts an integer or buffer.")
     }
-
+    this.length = this.size * BYTE_SIZE;
   }
   buffer() {
     return this.array;
@@ -43,9 +41,11 @@ class BitView {
     }
     const original = this.array[n >> 3];
     const oldValue = (original >>> (BYTE_SIZE - 1 - (n % BYTE_SIZE))) % 2;
-    const bool = Boolean(oldValue) ? 0 : 1;
-    if (bool) {
-      this.array[n >> 3] = (original | bool << (BYTE_SIZE - 1 - (n % BYTE_SIZE)));
+    if (oldValue) {
+      this.array[n >> 3] = (original ^ 1 << (BYTE_SIZE - 1 - (n % BYTE_SIZE)));
+    } else {
+      this.array[n >> 3] = (original | 1 << (BYTE_SIZE - 1 - (n % BYTE_SIZE)));
+
     }
   }
   toggle(n) {
@@ -56,8 +56,12 @@ class BitView {
       throw new Error("Index out of range.")
     }
     const original = this.array[n >> 3];
-    const bool = Boolean(value) ? 1 : 0;
-    this.array[n >> 3] = (original | bool << (BYTE_SIZE - 1 - (n % BYTE_SIZE)));
+    if (original) {
+      this.array[n >> 3] = (original ^ 1 << (BYTE_SIZE - 1 - (n % BYTE_SIZE)));
+    } else {
+      this.array[n >> 3] = (original | 1 << (BYTE_SIZE - 1 - (n % BYTE_SIZE)));
+
+    }
   }
 
 }

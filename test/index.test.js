@@ -13,33 +13,39 @@ it('it should accept a buffer as an input', () => {
 });
 
 it('bit value should be changed when flip is invoked.', () => {
-  const bitviewer = new BitView(128);
-  for(let i=0;i<128;i+=2){
+  const bitviewer = new BitView(1024);
+  for(let i=0;i<1024;i+=2){
     bitviewer.flip(i);
   }
-  for(let i=0;i<128;i+=2){
+  for(let i=0;i<1024;i+=2){
     expect(bitviewer.get(i)).toBe(1);
     expect(bitviewer.flip(i));
   }
-  /*
-  for(let i=0;i<128;i+=2){
+
+  for(let i=0;i<1024;i+=2){
     expect(bitviewer.get(i)).toBe(0);
   }
-  */
-  for(let i=1;i<128;i+=2){
+
+  for(let i=1;i<1024;i+=2){
     expect(bitviewer.get(i)).toBe(0);
   }
 });
 
 it('bit value should be changed when set is invoked.', () => {
-  const bitviewer = new BitView(128);
-  for(let i=0;i<128;i+=2){
+  const bitviewer = new BitView(1024);
+  for(let i=0;i<1024;i+=2){
     bitviewer.set(i,1);
   }
-  for(let i=0;i<128;i+=2){
+  for(let i=0;i<1024;i+=2){
     expect(bitviewer.get(i)).toBe(1);
   }
-  for(let i=1;i<128;i+=2){
+  for(let i=0;i<1024;i+=2){
+    bitviewer.set(i,0);
+  }
+  for(let i=0;i<1024;i+=2){
+    expect(bitviewer.get(i)).toBe(0);
+  }
+  for(let i=1;i<1024;i+=2){
     expect(bitviewer.get(i)).toBe(0);
   }
 });
