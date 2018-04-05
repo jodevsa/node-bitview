@@ -78,3 +78,11 @@ it('.from should accept an array of bits', () => {
     expect(view.get(i)).toBe(bits[i]);
   }
 });
+
+it('.from should accept an array of bits', () => {
+  const str="1111011110111";
+  const view= BitView.from(str);
+  for(let i=0;i<str.length;i++){
+    expect(view.get(i)).toBe(Number(str[i]));
+  }
+});

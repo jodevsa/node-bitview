@@ -1,5 +1,5 @@
 const BYTE_SIZE = 8;
-const assert = require('assert');
+
 const handleElement = (element) => {
   if (element === '0') {
     return 0;
@@ -11,9 +11,8 @@ const handleElement = (element) => {
 const fromArray = (arr) => {
   const view = new BitView(arr.length)
   for (let i = 0; i < arr.length; i++) {
-    const value = arr[i]
+    const value = handleElement(arr[i]);
     view.set(i, value);
-    assert.equal(view.get(i), value);
   };
   return view;
 }
