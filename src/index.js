@@ -21,7 +21,7 @@ class BitView {
     if (typeof(arg) === 'number') {
       const size = arg;
       this.size = Math.ceil(size / BYTE_SIZE);
-      this.array = new Buffer(this.size);
+      this.array = Buffer.alloc(this.size);
     } else if (Buffer.isBuffer(arg)) {
       const buffer = arg;
       this.array = buffer;
