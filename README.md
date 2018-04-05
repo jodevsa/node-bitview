@@ -1,8 +1,9 @@
-Node Bit View
+Node BitView
 ===============================
 
-Ever wanted to manipulate bits instead of buffers ?  
-this is what the library is about.
+NodeJS Buffer interface provides ways to manipulate bytes, but what if we needed to manipulate bits?
+
+This library was created to address the gap of a built-in bit interface.
 
 
 Installation
@@ -10,27 +11,36 @@ Installation
 
 `npm install bitview --save`
 
-Initalizing a view
+Initializing a view
 -----
     new BitView(Length)
     new BitView(buffer)
+    Buffer.from(arg)
 
 ##### Parameters:
     length: length in bits
     buffer: use an existing buffer
+    arg: Another interface to create a new BitView instance
+    arg could be an array of bits [1,0,1] or a string '1010' or a buffer.
+
 Methods
 -----    
 ### .flip(pos)
     flips the value of the bit at location pos
 ### .get(pos)
-    return the value of the bit at location pos  (0 or 1)
+    Returns the value of the bit at location pos  (0 or 1)
 ### .set(pos,v)
     Sets the value of a bit at location pos to v
-
+### .toBuffer()
+    Returns the buffer used by the view.
 Properties
 -----
 ### .length
-    returns length in bits.
+    Returns length in bits.
+
+### .from(arg)
+    Another interface to create a new BitView instance
+    arg could be an array of bits [1,0,1] or a string '1010' or a buffer.
 
 Usage:
 
@@ -42,7 +52,14 @@ const view= new BitView(10);
 view.set(0,true);
 console.log(view.get(0)); // true
 view.flip(0)
-console.log(view.get(0)); //false
+console.log(view.get(0)); // false
+
+const view2=BitView.from('101010');
+console.log(view2.get(2)); // true
+
+const view3=BitView.from([1, 0, 1]);
+console.log(view3.get(1)); // false
+console.log(view3.get(2)); // true
 ```
 Implementation
 ----------------------
