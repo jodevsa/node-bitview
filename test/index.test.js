@@ -99,7 +99,7 @@ it('.toString() should return a string representation of the BitView', () => {
 
 
 
-it('it should accept an InfinityBuffer as an input', () => {
+it('it should accept an FatBuffer as an input', () => {
   const buffer = new FatBuffer(32)
   const bitviewer = new BitView(buffer);
   expect(bitviewer.length).toBe(32 * 8);
