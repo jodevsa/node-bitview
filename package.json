@@ -1,6 +1,6 @@
 {
   "name": "bitview",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "buffer bitview",
   "main": "src/index.js",
   "scripts": {
@@ -15,5 +15,8 @@
   "license": "ISC",
   "devDependencies": {
     "jest": "^22.4.3"
+  },
+  "dependencies": {
+    "fatbuffer": "0.0.2"
   }
 }
