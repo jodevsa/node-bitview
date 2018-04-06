@@ -1,4 +1,5 @@
 const BitView = require('../src/');
+const FatBuffer = require('fatbuffer');
 const buffer = require('buffer');
 
 it('it should accept a length as an input', () => {
@@ -94,4 +95,35 @@ it('.toString() should return a string representation of the BitView', () => {
     expect(view.get(i)).toBe(Number(str[i]));
   }
   expect(view.toString()).toBe(str);
+});
+
+
+
+it('it should accept an InfinityBuffer as an input', () => {
+  const buffer = new FatBuffer(32)
+  const bitviewer = new BitView(buffer);
+  expect(bitviewer.length).toBe(32 * 8);
+});
+
+
+it('it should work with large FatBuffer.', () => {
+  const B= new FatBuffer(buffer.kMaxLength)
+  const bitviewer = new BitView(B);
+  const n=20000
+  const start=buffer.kMaxLength*8- n
+  for(let i=start;i<start+n;i+=2){
+    bitviewer.set(i,1);
+  }
+  for(let i=start;i<start+n;i+=2){
+    expect(bitviewer.get(i)).toBe(1);
+  }
+  for(let i=start;i<start+n;i+=2){
+    bitviewer.set(i,0);
+  }
+  for(let i=start;i<start+n;i+=2){
+    expect(bitviewer.get(i)).toBe(0);
+  }
+  for(let i=start+1;i<start+n;i+=2){
+    expect(bitviewer.get(i)).toBe(0);
+  }
 });

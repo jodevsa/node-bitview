@@ -1,4 +1,5 @@
 const BYTE_SIZE = 8;
+const FatBuffer = require('fatbuffer');
 
 const handleElement = (element) => {
   if (element === '0') {
@@ -22,7 +23,7 @@ class BitView {
       const size = arg;
       this.size = Math.ceil(size / BYTE_SIZE);
       this.array = Buffer.alloc(this.size);
-    } else if (Buffer.isBuffer(arg)) {
+    } else if (Buffer.isBuffer(arg ) || FatBuffer.isFatBuffer(arg)) {
       const buffer = arg;
       this.array = buffer;
       this.size = buffer.length;
