@@ -20,9 +20,9 @@ class BitView {
   constructor(arg, offset = 0) {
     if (typeof(arg) === 'number') {
       this.size = Math.ceil(arg / BYTE_SIZE);
-      this._arrayBuffer=new ArrayBuffer(this.size);
+      this._arrayBuffer = new ArrayBuffer(this.size);
     } else if (Buffer.isBuffer(arg)) {
-      this._arrayBuffer= arg.buffer;
+      this._arrayBuffer = arg.buffer;
       this.size = arg.length;
     } else {
       throw new Error("BitView only accepts an integer or buffer.")
@@ -86,7 +86,7 @@ class BitView {
     const original = this.view.getUint8(position);
     const oldValue = (original >> (BYTE_SIZE - 1 - (n % BYTE_SIZE))) % 2;
     if (value) {
-      this.view.setUint8(position,(original | 1 << (BYTE_SIZE - 1 - (n % BYTE_SIZE))));
+      this.view.setUint8(position, (original | 1 << (BYTE_SIZE - 1 - (n % BYTE_SIZE))));
 
     } else if (oldValue) {
       this.view.setUint8(position, (original ^ 1 << (BYTE_SIZE - 1 - (n % BYTE_SIZE))));
