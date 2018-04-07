@@ -52,25 +52,6 @@ it('bit value should be changed when set is invoked.', () => {
   }
 });
 
-it('it should work with large buffers.', () => {
-  const bitviewer = new BitView(buffer.kMaxLength*8);
-  const start=buffer.kMaxLength*8- 20000
-  for(let i=start;i<start+20000;i+=2){
-    bitviewer.set(i,1);
-  }
-  for(let i=start;i<start+20000;i+=2){
-    expect(bitviewer.get(i)).toBe(1);
-  }
-  for(let i=start;i<start+20000;i+=2){
-    bitviewer.set(i,0);
-  }
-  for(let i=start;i<start+20000;i+=2){
-    expect(bitviewer.get(i)).toBe(0);
-  }
-  for(let i=start+1;i<start+20000;i+=2){
-    expect(bitviewer.get(i)).toBe(0);
-  }
-});
 
 it('.from should accept an array of bits', () => {
   const bits=[1,0,1,0,1,0,1,0,1,0,0,1];
@@ -95,35 +76,4 @@ it('.toString() should return a string representation of the BitView', () => {
     expect(view.get(i)).toBe(Number(str[i]));
   }
   expect(view.toString()).toBe(str);
-});
-
-
-
-it('it should accept an FatBuffer as an input', () => {
-  const buffer = new FatBuffer(32)
-  const bitviewer = new BitView(buffer);
-  expect(bitviewer.length).toBe(32 * 8);
-});
-
-
-it('it should work with large FatBuffer.', () => {
-  const B= new FatBuffer(buffer.kMaxLength)
-  const bitviewer = new BitView(B);
-  const n=20000
-  const start=buffer.kMaxLength*8- n
-  for(let i=start;i<start+n;i+=2){
-    bitviewer.set(i,1);
-  }
-  for(let i=start;i<start+n;i+=2){
-    expect(bitviewer.get(i)).toBe(1);
-  }
-  for(let i=start;i<start+n;i+=2){
-    bitviewer.set(i,0);
-  }
-  for(let i=start;i<start+n;i+=2){
-    expect(bitviewer.get(i)).toBe(0);
-  }
-  for(let i=start+1;i<start+n;i+=2){
-    expect(bitviewer.get(i)).toBe(0);
-  }
 });
