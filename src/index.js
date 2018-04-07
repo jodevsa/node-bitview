@@ -16,20 +16,44 @@ const fromArray = (arr) => {
   };
   return view;
 }
+const calculateSize = (bufferSize, byteOffset, length) => {
+  if (length === 0 && byteOffset === 0) {
+    return bufferSize;
+  } else if (length == 0) {
+    return byteOffset;
+  } else {
+    return length;
+  }
+};
+
 class BitView {
-  constructor(arg, offset = 0) {
+  constructor(arg, byteOffset = 0, length = 0) {
     if (typeof(arg) === 'number') {
       this.size = Math.ceil(arg / BYTE_SIZE);
       this._arrayBuffer = new ArrayBuffer(this.size);
+      this.view = new DataView(this._arrayBuffer);
     } else if (Buffer.isBuffer(arg)) {
       this._arrayBuffer = arg.buffer;
-      this.size = arg.length;
+      this.size = calculateSize(arg.length, byteOffset, length);
+      if (length === 0) {
+        this.view = new DataView(this._arrayBuffer, byteOffset);
+      } else {
+        this.view = new DataView(this._arrayBuffer, byteOffset, length);
+      }
+    } else if (arg instanceof ArrayBuffer) {
+      this._arrayBuffer = arg;
+      this.size = calculateSize(arg.byteLength, byteOffset, length);
+      if (length === 0) {
+        this.view = new DataView(this._arrayBuffer, byteOffset);
+      } else {
+        this.view = new DataView(this._arrayBuffer, byteOffset, length);
+      }
     } else {
       throw new Error("BitView only accepts an integer or buffer.")
     }
-    this.view = new DataView(this._arrayBuffer);
+
     this.length = this.size * BYTE_SIZE;
-    this.offset = offset;
+    this.byteOffset = byteOffset;
   }
   static from(arg, offset = 0) {
     if (typeof(arg) === 'number' || Buffer.isBuffer(arg)) {

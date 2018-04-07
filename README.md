@@ -21,6 +21,7 @@ Initializing a view
 -----
     new BitView(Length)
     new BitView(buffer)
+    new BitView(buffer, byteOffset, length);
     Buffer.from(arg)
 
 ##### Parameters:
@@ -28,7 +29,8 @@ Initializing a view
     buffer: use an existing buffer
     arg: Another interface to create a new BitView instance
     arg could be an array of bits [1,0,1] or a string '1010' or a buffer.
-
+    byteOffset: default 0, starting offset of the bitview.
+    
 Methods
 -----    
 ### .flip(pos)
