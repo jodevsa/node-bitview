@@ -20,7 +20,7 @@ const calculateSize = (bufferSize, byteOffset, length) => {
   if (length === 0 && byteOffset === 0) {
     return bufferSize;
   } else if (length == 0) {
-    return byteOffset;
+    return bufferSize-byteOffset;
   } else {
     return length;
   }
@@ -80,7 +80,9 @@ class BitView {
 
   }
   get(n) {
-    if (n > (this.size * BYTE_SIZE - 1)) {
+
+    if (n > (this.length-1)) {
+      console.log(n,this.length)
       throw new Error("Index out of range.")
     }
     return (this.view.getUint8(n >>> 3) >>> (BYTE_SIZE - 1 - (n % BYTE_SIZE))) % 2
@@ -103,7 +105,7 @@ class BitView {
     return flip(n);
   }
   set(n, value) {
-    if (n > (this.size * BYTE_SIZE - 1)) {
+    if (n > (this.length-1)) {
       throw new Error("Index out of range.")
     }
     const position = n >>> 3;

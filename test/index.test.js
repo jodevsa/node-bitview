@@ -95,7 +95,7 @@ it('should accept byteOffset and length parameters', () => {
 
   buffer = new ArrayBuffer(512);
   view = new BitView(buffer, 2);
-  expect(view.length).toBe(2 * 8);
+  expect(view.length).toBe(510 * 8);
 
   buffer = new ArrayBuffer(2048);
   view = new BitView(buffer, 0, 62);
